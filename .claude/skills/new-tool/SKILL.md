@@ -17,7 +17,7 @@ You will be provided with:
 
 Complete this task in the following steps. **Step 1:** Identify all distinct techniques used in the solution and number them. **Step 2:** Confirm the list with the user. Ask the user, "Please confirm this list of techniques. If you would like to add or remove any techniques, let me know." **Step 3** Do not begin this step until Step 2 is completed. Ask the user, "Should I generate template entries for the entire list or only for selected ones. If only for selected ones, tell me which ones." **Step 4** Do not begin this step until Step 3 is completed. Ask the user, "The table will show an example of the technique in action. Which example should I reference for these techniques? If I should reference the problem and solution that was discussed, then type yes. Otherwise, let me know which one to reference, including the problem statement and solution. **Step 5** Do not begin this step until Step 4 is completed. Ask the user, "What is the source of this problem? For example, Algebra, 1st ed., Michael Artin. Exercise Ch. 1, 1.1." **Step 6:** Do not begin this step until step 5 is completed. For each numbered technique, generate a separate completed template entry - output each as its own Markdown table. Use the example only as a guide for formatting, level of detail, writing style, and organization. Do **not** copy or adapt the mathematical content from the example unless it is explicitly part of the new input.
 
-When completing the template, follow these requirements:
+When filling out the template as a Markdown table, follow these requirements:
 
 ### Tool
 
@@ -54,6 +54,7 @@ The example must:
 * Avoid context-dependent references such as “as above,” “earlier,” or “from the previous solution.”
 * Be understandable on its own without requiring additional context beyond the explicitly included mathematical objects.
 * Conclude with a bibliographic reference whenever applicable.
+* Be contained within one row of the Markdown table.
 
 ### Mathematical Formatting
 
@@ -66,7 +67,7 @@ The example must:
 * Do not invent definitions, theorems, or intermediate steps.
 * If a claim cannot be justified from standard mathematical results or the provided context, explicitly state that it cannot be verified rather than presenting it as fact.
 
-Your output should match the structure of the provided template exactly while replacing the content with the appropriate information derived from the new mathematical material.
+Your output should match the structure of the provided template exactly while replacing the content with the appropriate information derived from the new mathematical material and putting it all in a Markdown table.
 
 Here is the template:
 
