@@ -60,3 +60,15 @@ claude
 ## Example workflow
 
 After solving a math problem, paste your solution into ChatGPT. Start up Claude Code in the project folder, then run `/new-tool` and copy its output, which includes the prompt, the instructions, a blank template, and a completed example. Paste this entire output into ChatGPT. Once the AI has generated template tables that you are satisfied with, run `/new-tool-submission` separately for each completed table.
+
+## Running tests
+
+1. Make the test script executable (first time only).
+```
+chmod +x test.sh
+```
+
+2. Run the test.
+```
+./test.sh
+```
