@@ -55,7 +55,7 @@ claude
 | **Tool** | Use the discriminant of an irreducible cubic polynomial to determine whether its Galois group over the base field is $A_3$ or $S_3$. |
 | **Formal source** | Classical discriminant criterion for cubic polynomials: an irreducible cubic over a field $K$ has Galois group contained in $A_3$ iff its discriminant is a square in $K$; otherwise the Galois group is $S_3$. |
 | **What it accomplishes** | Converts the discriminant into a determination of the permutation group of the roots, distinguishing between cyclic ($A_3$) and full symmetric ($S_3$) Galois behavior. |
-| **Example** | Let $f(x)=x^3+px+q \in K[x]$ be irreducible with discriminant $\Delta=-4p^3-27q^2$. Assume $\Delta \notin K^2$. Then $\mathrm{Gal}(f)\cong S_3$. This implies the Galois group has 6 elements, not 3 elements as would be the case if $\mathrm{Gal}(f)\cong A_3$, so the orbit of a resolvent element under the group action consists of 6 conjugates, producing 6 linear factors in the associated splitting-field factorization. **Reference:** Harold Edwards, *Galois Theory* (2nd ed.), Fifth Exercise Set, Exercise 7. |
+| **Example** | Let $f(x)=x^3+px+q \in K[x]$ be irreducible with discriminant $\Delta=-4p^3-27q^2$. Assume $\Delta \notin K^2$. Then $\mathrm{Gal}(f)\cong S_3$, hence $\|Gal(f)\|=6$, whereas in the case of $\mathrm{Gal}(f)\cong A_3$, one has $\|Gal(f)\|=3$. **Reference:** Harold Edwards, *Galois Theory* (2nd ed.), Fifth Exercise Set, Exercise 7. |
 
 ## Example workflow
 
