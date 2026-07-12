@@ -6,7 +6,7 @@ Print the following exactly, with no modifications:
 
 ---
 
-Provide the below AI prompt, template, and example to your preferred AI such as ChatGPT. Call /new-tool-submission to add it to your tool library.
+Provide the below AI prompt, template, and example to your preferred AI such as ChatGPT. Call $new-tool-submission to add it to your tool library.
 
 ## AI Prompt
 

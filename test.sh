@@ -1,30 +1,61 @@
 #!/usr/bin/env bash
 set -eu
 
-PROJECT_DIR="tmp"
-TOOLS_PATH="$PROJECT_DIR/tools"
-INPUT_FILE="$PROJECT_DIR/input.md"
-EXPECTED_FILE="$PROJECT_DIR/expected.md"
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <claude|codex>"
+  exit 1
+fi
+
+CODING_AGENT="$1"
+
+TEMP_DIR="tmp"
+TOOLS_DIR="tools"
+TEST_TOOLS_PATH="$TEMP_DIR/$TOOLS_DIR"
+INPUT_FILE="$TEMP_DIR/input.md"
+EXPECTED_FILE="$TEMP_DIR/expected.md"
+
+case "$CODING_AGENT" in
+  claude)
+    CONFIG_FILE="CLAUDE.md"
+    SKILLS_DIR=".claude/skills"
+    SUBMISSION_COMMAND="/new-tool-submission"
+    ;;
+  codex)
+    CONFIG_FILE="AGENTS.md"
+    SKILLS_DIR=".agents/skills"
+    SUBMISSION_COMMAND="\$new-tool-submission"
+    ;;
+  *)
+    echo "Usage: $0 <claude|codex>"
+    exit 1
+    ;;
+esac
 
 cleanup() {
-  rm -rf "$PROJECT_DIR"
+  rm -rf "$TEMP_DIR"
 }
 trap cleanup EXIT
 
 init_env() {
-  rm -rf "$PROJECT_DIR"
-  mkdir -p "$TOOLS_PATH"
-  mkdir -p "$PROJECT_DIR/.claude/skills"
+  rm -rf "$TEMP_DIR"
+
+  mkdir -p "$TEST_TOOLS_PATH"
+  mkdir -p "$TEMP_DIR/$SKILLS_DIR"
 }
 
 setup_fixture() {
-  cp -R .claude/skills/new-tool-submission \
-    "$PROJECT_DIR/.claude/skills/"
+  if [ ! -d "$SKILLS_DIR/new-tool-submission" ]; then
+    echo "Missing skill: $SKILLS_DIR/new-tool-submission"
+    exit 1
+  fi
 
-  cat > "$PROJECT_DIR/CLAUDE.md" <<EOF
+  cp -R "$SKILLS_DIR/new-tool-submission" \
+    "$TEMP_DIR/$SKILLS_DIR/"
+
+  cat > "$TEMP_DIR/$CONFIG_FILE" <<EOF
 ## Configuration
 
-TOOLS_PATH=$TOOLS_PATH
+TOOLS_PATH=$TOOLS_DIR
 EOF
 
   cat > "$INPUT_FILE" <<'EOF'
@@ -46,17 +77,31 @@ EOF
 EOF
 }
 
-run_claude() {
+run_agent() {
   (
-    cd "$PROJECT_DIR"
-    claude -p /new-tool-submission < input.md --allowedTools "Bash,Read,Write"
+    cd "$TEMP_DIR"
+
+    case "$CODING_AGENT" in
+      claude)
+        claude \
+          -p "$SUBMISSION_COMMAND" \
+          < input.md \
+          --allowedTools "Bash,Read,Write"
+        ;;
+      codex)
+        codex \
+          exec "$SUBMISSION_COMMAND" \
+          < input.md \
+          > /dev/null 2>&1
+        ;;
+    esac
   )
 }
 
 assert_output() {
   shopt -s nullglob
 
-  files=("$TOOLS_PATH"/*.md)
+  files=("$TEST_TOOLS_PATH"/*.md)
 
   [ ${#files[@]} -eq 1 ] || {
     echo "FAIL: expected 1 file, got ${#files[@]}"
@@ -69,9 +114,11 @@ assert_output() {
   }
 }
 
+echo "Starting test ..."
+
 init_env
 setup_fixture
-run_claude
+run_agent
 assert_output
 
 echo "PASS"

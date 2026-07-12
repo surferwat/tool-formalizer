@@ -4,6 +4,8 @@ A simple system for formalizing reusable mathematical techniques.
 
 You're working through a textbook, you hit a technique worth keeping. Without a system, it gets lost. This gives it a permanent, searchable home.
 
+Agents supported: Claude Code, Codex.
+
 ## Installation
 
 ```
@@ -17,17 +19,20 @@ git clone https://github.com/surferwat/tool-formalizer.git
 cd tool-formalizer
 ```
 
-2. Open Claude Code.
+2. Make the setup script executable (first time only).
 ```
-claude
+chmod +x setup.sh
 ```
 
-3. Point the system at your tools folder.
+3. Point the system at your tools folder. Replace <tools-dir> with your preferred directory, e.g., ~/tools.
+
 ```
-/setup
+./setup.sh <tools-dir>
 ```
 
 ## Usage
+
+For Claude Code:
 
 1. Get the template.
 ```
@@ -37,6 +42,18 @@ claude
 2. Submit the completed template.
 ```
 /new-tool-submission
+```
+
+For Codex:
+
+1. Get the template.
+```
+$new-tool
+```
+
+2. Submit the completed template.
+```
+$new-tool-submission
 ```
 
 ## The template
@@ -69,6 +86,7 @@ chmod +x test.sh
 ```
 
 2. Run the test.
+
 ```
-./test.sh
+./test.sh <claude | codex>
 ```

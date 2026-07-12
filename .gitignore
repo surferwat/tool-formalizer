@@ -1,1 +1,4 @@
 .Rhistory
+.template
+TEMPLATE.md
+init_agents.sh

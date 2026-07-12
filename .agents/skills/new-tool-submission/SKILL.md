@@ -6,7 +6,7 @@ The user has submitted a filled-out math tool template. Follow these steps exact
 
 ## Step 0 — Check configuration
 
-Read the `## Configuration` section of `CLAUDE.md`. If `TOOLS_PATH` is not set, stop and tell the user: `TOOLS_PATH is not configured. Please run ./setup first.`
+Read the `## Configuration` section of `AGENTS.md`. If `TOOLS_PATH` is not set, stop and tell the user: `TOOLS_PATH is not configured. Please run ./setup first.`
 
 ## Step 1 — Lint
 
@@ -45,7 +45,7 @@ Example: `003-reduction-of-quadratic-to-depressed-form.md`
 
 ## Step 3 — Save
 
-Write the following to `<TOOLS_PATH>/<slug>.md`, where `TOOLS_PATH` is defined in the `## Configuration` section of `CLAUDE.md`:
+Write the following to `<TOOLS_PATH>/<slug>.md`, where `TOOLS_PATH` is defined in the `## Configuration` section of `AGENTS.md`:
 
 ```
 | Field | Value |
